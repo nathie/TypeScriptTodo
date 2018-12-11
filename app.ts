@@ -1,14 +1,9 @@
+// Chapter 2.4 Let & Const
 var container = document.getElementById('container');
 
-var todo = {
-    id: 123,
-    name: "Pick up drycleaning",
-    completed: true
+for (var x = 0; x <= 5; x++) {
+  let counter = x;
 }
 
-container.innerHTML = `
-<div todo='${todo.id}' class="list-group-item}">
-  <i class="${ todo.completed ? "" : "hidden" } text-success glyphicon glyphicon-ok"></i>
-  <span class="name">${todo.name}</span>
-</div>
-`;
+// counter is out of scope
+console.log(counter);
