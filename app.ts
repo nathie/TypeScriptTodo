@@ -1,9 +1,11 @@
-// Chapter 2.4 Let & Const
-var container = document.getElementById('container');
+// Chapter 2.5 For of loops
+var array = [
+  "Pick up drycleaning", 
+  "Clean Batcave", 
+  "Save Gotham"
+];
 
-for (var x = 0; x <= 5; x++) {
-  let counter = x;
+for (var index in array) {
+  var value = array[index];
+  console.log(`${index}: ${value}`);
 }
-
-// counter is out of scope
-console.log(counter);
