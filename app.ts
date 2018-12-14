@@ -1,61 +1,57 @@
-/* 
-Destructuring: is the ability to assign values 
-to multiple variables from a single object with 
-a single statement.
-*/
+// Spread operator
 
-var array = [123, "Pick up drycleaning", false];
-var [id, title, completed] = array;
-
-// To switch values
-var a = 1, b = 5;
-
-//Normally you need a temp variable to make the switch
-// with ES5
-[a, b] = [b, a];
-console.log(`A = ${a} B = ${b}`);
-
-// In case of object the values are assigned by the
-// name of the property
-
-// var todo = {
-//   id: 123,
-//   title: "Pick up",
-//   completed: false
-// }
-
-// var {id, title, completed } = todo;
-
-// Or creating a function that returns he values
-function getTodo() {
-  var todo = {
-    id: 123,
-    title: "Pick up",
-    completed: false
+// Here is not clear if this function accepts arguments
+function addEmpty() {
+  var values = Array.prototype.splice.call(arguments, [1]),
+      total = 0;
+console.log(values);
+  for (var value of values) {
+      total += value;
   }
-
-  return todo;
+  return total;
 }
 
-var {id, title, completed } = getTodo();
-console.log(id, title, completed);
+console.log("addEmpty", addEmpty());
 
-// Reduce parameters sent to a function
-function countdown({
-  initial,
-  final = 0,
-  interval,
-  initial: current
-}) {
+function add(...values) { // The spread operator must be the last argument
+  var total = 0;
 
-    var current = initial;
-
-    while (current > final) {
-        current -= interval;
-        console.log("current", current);
-    }
-
+  for (var value of values) {
+      total += value;
+  }
+  return total;
 }
 
-var options =  {initial: 10, final: 5, interval: 1};
-countdown(options);
+add(1, 2, 3);
+
+// Multiple parameters
+function calculate(action, ...values) { // The spread operator must be the last argument
+  var total = 0;
+
+  for (var value of values) {
+    switch (action) {
+      case 'add':
+        total += value;
+        break;
+      case 'substract':
+        total -= value;
+        break;
+    }  
+  }
+  return total;
+}
+
+calculate('add', 2, 1, 4);
+
+// With arrays
+var source = [3, 4, 5];
+var target = [1, 2, ...source, 6, 7];
+console.log(target);
+
+// Concat arrays
+var list = [1, 2, 3], toAdd = [4, 5, 6];
+// Before
+// Array.prototype.push.apply(list, toAdd);
+// Now
+list.push(...toAdd);
+console.log("list", list);
