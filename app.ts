@@ -1,37 +1,61 @@
-// Chapter 2.6 Lambda Expressions or Arrow functions
+/* 
+Destructuring: is the ability to assign values 
+to multiple variables from a single object with 
+a single statement.
+*/
 
-var container = document.getElementById('container');
+var array = [123, "Pick up drycleaning", false];
+var [id, title, completed] = array;
 
-function Counter(el) {
+// To switch values
+var a = 1, b = 5;
 
-  this.count = 0;
+//Normally you need a temp variable to make the switch
+// with ES5
+[a, b] = [b, a];
+console.log(`A = ${a} B = ${b}`);
 
-  el.innerHTML = this.count;
+// In case of object the values are assigned by the
+// name of the property
 
-  // el.addEventListener('click', 
-  //   function () {
-  //       this.count += 1; // 'this' refers to the global browser scope not to the one inside the function
-  //       el.innerHTML = this.count;
-  //   })
+// var todo = {
+//   id: 123,
+//   title: "Pick up",
+//   completed: false
+// }
 
-  // An old solution is to create a reference to the function this and access it inside  
-  // let that = this;
+// var {id, title, completed } = todo;
 
-  // el.addEventListener('click', 
-  //   function () {
-  //       that.count += 1; 
-  //       el.innerHTML = that.count;
-  //   })
+// Or creating a function that returns he values
+function getTodo() {
+  var todo = {
+    id: 123,
+    title: "Pick up",
+    completed: false
+  }
 
-  // With Arrow functions
-  
-  el.addEventListener('click', () => {
-    this.count += 1; // Now 'this' references to the Counter function
-    el.innerHTML = this.count;
-  })
+  return todo;
 }
 
-new Counter(container);
+var {id, title, completed } = getTodo();
+console.log(id, title, completed);
 
-var filtered = [1, 2, 3].filter(x => x > 1);
-console.log(filtered);
+// Reduce parameters sent to a function
+function countdown({
+  initial,
+  final = 0,
+  interval,
+  initial: current
+}) {
+
+    var current = initial;
+
+    while (current > final) {
+        current -= interval;
+        console.log("current", current);
+    }
+
+}
+
+var options =  {initial: 10, final: 5, interval: 1};
+countdown(options);
